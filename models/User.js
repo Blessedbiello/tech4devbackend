@@ -8,10 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const UserSchema = new mongoose.Schema({
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+ export const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "Please add a name"],
@@ -61,4 +62,6 @@ UserSchema.methods.matchPassword = function (enteredPassword) {
         return yield bcrypt.compare(enteredPassword, this.password);
     });
 };
-module.exports = mongoose.model("User", UserSchema);
+// module.exports = mongoose.model("User", UserSchema);
+// User = mongose.model("User", UserSchema);
+// export const User;

@@ -1,11 +1,11 @@
-import ErrorResponse from "../utils/errorResponse";
-import asyncHandler from "../middleware/async";
+import { ErrorResponse } from "../utils/errorResponse";
+import { asyncHandler } from "../middleware/async";
 import User from "../models/User";
 
 // @des Register user
 // @route POST /api/v1/auth/register
 // @access  Public
-exports.register = asyncHandler(async (req: Request, res: Response, next) => {
+export const register = asyncHandler(async (req: any, res: any, next: any) => {
   const { firstName, surName, email, password, occupation } = req.body;
 
   // Create user
@@ -14,7 +14,7 @@ exports.register = asyncHandler(async (req: Request, res: Response, next) => {
     surName,
     email,
     password,
-    occupation,
+    occupation
   });
 
   sendTokenResponse(user, 200, res);
@@ -23,7 +23,7 @@ exports.register = asyncHandler(async (req: Request, res: Response, next) => {
 // @des Login user
 // @route POST /api/v1/auth/login
 // @access  Public
-exports.login = asyncHandler(async (req, res, next) => {
+export const login = asyncHandler(async (req: any, res: any, next: (arg0: any) => any) => {
   const { email, password } = req.body;
 
   // Validate email & password
@@ -49,9 +49,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 });
 
 // Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
+const sendTokenResponse = (user: String, statusCode: Number, res: Response) => {
   //Create token
-  const token = user.getSignedJwtToken();
+  const token = user.getSignedJwtToken() as String;
 
   const options = {
     expires: new Date(
